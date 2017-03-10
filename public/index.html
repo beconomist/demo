@@ -1,0 +1,76 @@
+<html>
+<head>
+  <style>
+    html {
+      background-color: yellow;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    button {
+      margin-top: 50px;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>  The Playground of Taipei Beginner Programmers </h1>
+
+<!-- Fetch random cat image -->
+<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>
+<h2> Featured Meetups </h2>
+
+<div id='meetup-container'>
+
+</div>
+<h2> Popular Articles </h2>
+<div id='post-container'>
+
+</div>
+
+<button type='button' onclick='getMeetups()'> Events </button>
+<button type='button' onclick='getPosts()'> Posts </button>
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+
+<script type='text/javascript'>
+
+function getMeetups() {
+  fetch('/meetups', {
+    method: 'get' }).then((response) => {
+      return response.text();
+    }).then((text) => {
+
+      document.getElementById('meetup-container').innerHTML = text;
+    }).catch((err) => {
+      throw err;
+    });
+ }
+
+ function getPosts() {
+   fetch('/posts', { method: 'get' })
+     .then((response) => { return response.json(); })
+     .then((postsArray) => {
+       console.log(postsArray);
+      postsArray.forEach((post) => {
+        let listItem = document.createElement('div');
+        listItem.innerHTML = '<h3>' + post.title + '</h3>' + '<p style="font-style:italic"> by ' + post.author + '</p>' + '<p>' + post.content + '</p>';
+
+        document.getElementById('post-container').appendChild(listItem);
+
+      });
+
+    }).catch((err) => {
+      throw err;
+    });
+ }
+
+</script>
+
+</body>
+</html>
