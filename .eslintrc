@@ -1,3 +1,5 @@
 {
-  “extends": "rallycoding"
+  "env": {
+    "es6": true
+    }
 }
