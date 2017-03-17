@@ -4,6 +4,9 @@ const mongoose = require('mongoose'), // mongoose 是 nodejs app 和 mongoDB 的
       bcrypt = require('bcrypt'), // 將使用者輸入的密碼加密後存入資料庫
       SALT_WORK_FACTOR = 12;  // 加密時的計算複雜係數
 
+// 把 mongoose 的 Promise 設定為 Node.js 的 Promise
+mongoose.Promise = global.Promise;
+
 // 每一個 schema 都是 mongoDB 裡的一個 collection
 const UserSchema = new Schema({
   // 帳號名稱 (使用者名稱)

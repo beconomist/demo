@@ -2,9 +2,8 @@
 const assert = require('assert');
 const User = require('../src/user');
 
-
 describe('Creating records', () => {
-  it('save a user', () => {
+  it('saves a user', (done) => {
 
     // 宣告一個測試資料 (document)
     const bao = new User({
@@ -13,12 +12,11 @@ describe('Creating records', () => {
       email: 'becomomist@gmail.com'
     });
 
-    bao.save((err) => {
-      if (err) {
-        console.warn(err);
-      } else {
-        console.log('bao is saved');
-      }
+    bao.save()
+      .then(() => {
+        // bao 已經存入資料庫的話，!isNew就是 true
+        assert(!bao.isNew);
+        done();
     });
 
     // 將測試資料存入資料庫
