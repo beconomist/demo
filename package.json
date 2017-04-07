@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha -R min'"
+    "test": "NODE_ENV=test nodemon --exec 'mocha -R min'"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-register": "^6.23.0",
     "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
     "eslint": "^3.16.1",
     "express": "^4.15.0",
+    "handlebar": "^1.0.0",
+    "handlebars": "^4.0.6",
     "jquery": "^3.1.1",
     "meetup-api": "^1.4.9",
     "mocha": "^3.2.0",
@@ -22,6 +25,7 @@
     "eslint": "^3.17.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.10.0"
+    "eslint-plugin-react": "^6.10.0",
+    "supertest": "^3.0.0"
   }
 }
