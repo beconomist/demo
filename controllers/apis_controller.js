@@ -5,11 +5,6 @@ const meetup = require('meetup-api')({
 
 module.exports = {
 
-  // 首頁
-  // greeting(req, res) {
-  //   res.sendfile('index.html', { root: __dirname });
-  // },
-
   // Meetup List Component
   getMeetups(req, res, next) {
 
