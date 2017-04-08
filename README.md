@@ -2,11 +2,11 @@
 
  1. Install MongoDB in local machine
 
-...https://docs.mongodb.com/manual/installation/
+    https://docs.mongodb.com/manual/installation/
 
  2. Start MongoDB service
 
-...Issue the following command at the system shell: `mongod`
+    Issue the following command at the system shell: `mongod`
 
  3. Inside project directory run `node index.js`
 
