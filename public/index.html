@@ -10,25 +10,26 @@
       margin-top: 50px;
     }
   </style>
+  <link rel='stylesheet' type='text/css' href='css/style.css' />
 </head>
 <body>
-<h1>  The Playground of Taipei Beginner Programmers </h1>
 
-<!-- Fetch random cat image -->
-<img src='./images/TBP_logo_small.png' />
+<img class='logo' src='./images/TBP-logo-2.png' />
 
-<h2> Featured Meetups </h2>
+<h1> Taipei Beginner Programmers </h1>
+
+
+<button type='button' class='admin-btn' onclick='location.href="/admin.html"'> Admin </button>
+
+<h2> 活動報名 </h2>
 
 <div id='meetup-container'>
 
 </div>
-<h2> Popular Articles </h2>
+<h2> 部落格 </h2>
 <div id='post-container'>
 
 </div>
-
-<button type='button' onclick='getMeetups()'> Events </button>
-<button type='button' onclick='getPosts()'> Posts </button>
 
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -38,35 +39,35 @@
 
 <script type='text/javascript'>
 
-function getMeetups() {
+$(document).ready(() => {
+
+  // 顯示5篇最新文章
+  fetch('/posts', { method: 'get' })
+    .then((response) => { return response.json(); })
+    .then((postsArray) => {
+      console.log(postsArray);
+     postsArray.forEach((post) => {
+       let listItem = document.createElement('div');
+       // listItem.innerHTML = '<h3>' + post.title + '</h3>' + '<p style="font-style:italic"> by ' + post.author + '</p>' + '<p>' + post.content + '</p>' + <span>;
+       listItem.innerHTML = `<h3>${post.title}</h3><p style="font-style:italic">by ${post.author} </p> <p>${post.content}</p><span class="tag-style">${post.tag}</span>`
+       document.getElementById('post-container').appendChild(listItem);
+     });
+   }).catch((err) => {
+     throw err;
+   });
+
+  // 顯示最新meetup
   fetch('/meetups', {
     method: 'get' }).then((response) => {
       return response.text();
     }).then((text) => {
-
       document.getElementById('meetup-container').innerHTML = text;
     }).catch((err) => {
       throw err;
     });
- }
 
- function getPosts() {
-   fetch('/posts', { method: 'get' })
-     .then((response) => { return response.json(); })
-     .then((postsArray) => {
-       console.log(postsArray);
-      postsArray.forEach((post) => {
-        let listItem = document.createElement('div');
-        listItem.innerHTML = '<h3>' + post.title + '</h3>' + '<p style="font-style:italic"> by ' + post.author + '</p>' + '<p>' + post.content + '</p>';
+});
 
-        document.getElementById('post-container').appendChild(listItem);
-
-      });
-
-    }).catch((err) => {
-      throw err;
-    });
- }
 
 </script>
 

@@ -7,14 +7,7 @@ const PostSchema = new Schema({
   title: String,
   author: String,
   content: String,
-  tag: String,
-  comments: [{ body: String, date: Date }],
-  date: { type: Date, default: Date.now },
-  hidden: Boolean,
-  meta: {
-    votes: Number,
-    favs: Number
-  }
+  tag: String
 });
 
 const Post = mongoose.model('post', PostSchema);

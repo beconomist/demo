@@ -1,0 +1,47 @@
+.form-style {
+  width: 100%;
+  /*margin: 20px;*/
+  margin: 5px;
+}
+
+.tag-style {
+  padding: 2px;
+  font-family: sans-serif;
+  font-size: 12px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 3px;
+  border-color: black;
+  background-color: black;
+  color: white;
+}
+
+h2 {
+  padding-bottom: 5px;
+  border-bottom: 2px solid black;
+}
+
+.admin-btn {
+  width: 100%;
+  background-color: black;
+  color: white;
+  border-style: none;
+  border-radius: 3px;
+  padding: 2px;
+  font-size: 20px;
+}
+.admin-btn:hover {
+  cursor: pointer;
+}
+
+h1 {
+  margin-left: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.logo {
+  width: 50px;
+  display: inline-block;
+  vertical-align: middle;
+}

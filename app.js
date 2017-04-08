@@ -10,6 +10,7 @@ require('babel-register');
 const express = require('express');
 const routes = require('./routes/routes');
 const app = express();
+const path = require('path');
 const bodyParser = require('body-parser');
 let numberOfRequest = 0;
 const mongoose = require('mongoose');
@@ -24,8 +25,16 @@ if(process.env.NODE_ENV !== 'test') {
   });
 }
 
+/** bodyParser.urlencoded(options)
+ * 瀏覽器通常將POST的表單資料以URL encoded的格式傳送，
+ * 所以用bodyParser.urlencoded去parse
+ */
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 // 假設每個req.body都是json格式把他parse成object
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // 這個 middleware 會紀錄所有 request 的次數、時間、url和 method，
 // 但是沒有 end the request-response cycle，所以要 call next
@@ -41,7 +50,7 @@ app.use(function(req, res, next){
 
 // 設定 static resources 的檔案夾
 // express 會直接從 public 檔案夾 load，所以 public 並不會成為 URL 的一部分
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Router middleware
 routes(app);

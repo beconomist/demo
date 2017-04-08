@@ -14,10 +14,14 @@ module.exports = (app) => {
 
 
   // 首頁
-  app.get('/', APIsController.greeting);
+  // app.get('/', APIsController.greeting);
 
   // Posts related routes:
   app.get('/posts', PostsController.getPosts);
+
+  // app.get('/admin', PostsController.getAdmin);
+
+  app.post('/postForm', PostsController.createPosts);
 
   // Users related routes
   app.post('/users', UsersController.create);
