@@ -16,16 +16,14 @@ module.exports = {
   //
   // },
 
-  createPosts(req, res, next) {
-    console.log(req.body.content);
+  createPost(req, res, next) {
+    console.log(req.body);
 
     const postProps = req.body;
 
     Post.create(postProps)
-      .then((post) => {
-        res.redirect('/').send(post);
-      })
-        .catch(next);
+      .then( post => res.redirect('/').send(post))
+      // .catch(next);
   }
 
 }

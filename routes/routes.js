@@ -21,7 +21,7 @@ module.exports = (app) => {
 
   // app.get('/admin', PostsController.getAdmin);
 
-  app.post('/postForm', PostsController.createPosts);
+  app.post('/postForm', PostsController.createPost);
 
   // Users related routes
   app.post('/users', UsersController.create);

@@ -23,7 +23,9 @@ before(done => {
 // 所以 DB 的操作都需要時間，所以有 done CB
 beforeEach((done) => {
   console.log('清空資料庫：刪除所有使用者資料');
-  mongoose.connection.collections.users.drop()
-  .then(() => done())
-  .catch(() => done());
+  const { users, posts, comments } = mongoose.connection.collections;
+
+  Promise.all([users.drop(), posts.drop(), comments.drop()])
+    .then(() => done())
+    .catch(() => done());
 });

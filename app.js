@@ -38,15 +38,15 @@ app.use(bodyParser.urlencoded({
 
 // 這個 middleware 會紀錄所有 request 的次數、時間、url和 method，
 // 但是沒有 end the request-response cycle，所以要 call next
-app.use(function(req, res, next){
-  console.log('Server is requested: ' + (++numberOfRequest) + ' time(s)');
-  console.log('Requested time: %d', Date.now());
-  console.log('Request URL: ' , req.originalUrl);
-  console.log('Request Type: ' , req.method);
-  console.log('---');
-  // Call next()，將 control 交給下一個 middleware
-  next();
-});
+// app.use(function(req, res, next){
+//   console.log('Server is requested: ' + (++numberOfRequest) + ' time(s)');
+//   console.log('Requested time: %d', Date.now());
+//   console.log('Request URL: ' , req.originalUrl);
+//   console.log('Request Type: ' , req.method);
+//   console.log('---');
+//   // Call next()，將 control 交給下一個 middleware
+//   next();
+// });
 
 // 設定 static resources 的檔案夾
 // express 會直接從 public 檔案夾 load，所以 public 並不會成為 URL 的一部分
