@@ -1,4 +1,10 @@
-### How to use
+12in12.tw Project
+===
+A Basic CMS for Taipei Beginner Programmers Meetup Group
+---
+
+
+### Run App
 
  1. Install MongoDB in local machine
 
@@ -11,3 +17,7 @@
  3. Inside project directory run `node index.js`
 
  4. Open browser, navigate to 127.0.0.1:3000
+
+### Run Test
+
+  1. Run `npm run test`

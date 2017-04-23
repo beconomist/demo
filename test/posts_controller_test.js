@@ -10,7 +10,8 @@ describe('Posts controller test', () => {
 
   it.only('creates a post to /postForm', (done) => {
     request(app)
-      .post('/postForm')
+      .post('/posts')
+      .set('Content-Type', 'application/x-www-form-urlencoded')
       .send({
         title: 'New Post',
         content: 'New Content',
@@ -19,8 +20,7 @@ describe('Posts controller test', () => {
       .end(() => {
         Post.findOne({ title: 'New Post' })
           .then((post) => {
-            console.log(post);
-            assert(post.title === 'New Post');
+            assert(post.content === 'New Content');
             done();
           });
       });

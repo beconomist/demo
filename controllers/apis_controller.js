@@ -10,17 +10,22 @@ module.exports = {
 
     meetup.getEvents({
       member_id: 'self'}, (err, events) => {
+        let html;
+
         if (err) next();
         // events有三個properties: results, meta, ratelimit
-        const eventsArray = events.results.map((result) => {
-          return result['name'];
-        });
+        if (events === null) {
+          html = '目前無法讀到meetup活動！'
+        } else {
+          const eventsArray = events.results.map((result) => {
+            return result['name'];
+          const listItemsHTML = eventsArray.map((event) => {
+            return '<li>' + event + '</li>';
+          }).join('');
 
-        const listItemsHTML = eventsArray.map((event) => {
-          return '<li>' + event + '</li>';
-        }).join('');
-
-        const html = '<ol>' + listItemsHTML + '</ol>';
+          html = '<ol>' + listItemsHTML + '</ol>';
+          });
+        }
 
         res.send(html);
       });

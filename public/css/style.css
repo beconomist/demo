@@ -1,3 +1,9 @@
+html {
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .form-style {
   width: 100%;
   /*margin: 20px;*/
@@ -29,6 +35,7 @@ h2 {
   border-radius: 3px;
   padding: 2px;
   font-size: 20px;
+  margin: 10px;
 }
 .admin-btn:hover {
   cursor: pointer;
@@ -44,4 +51,46 @@ h1 {
   width: 50px;
   display: inline-block;
   vertical-align: middle;
+}
+
+#popup {
+  display: none;
+  background-color: #FFFFFF;
+  padding: 50px;
+  position: fixed;
+}
+
+#close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-weight: bolder;
+  font-family: Arial;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  border: 2px solid black;
+  text-align: center;
+}
+#close-btn a {
+  display: table-cell;
+  vertical-align: middle;
+  height: 30px;
+  width: 30px;
+}
+#close-btn a:link {
+  text-decoration: none;
+  color: black;
+}
+#close-btn a:visited {
+  text-decoration: none;
+  color: black;
+}
+#close-btn a:link {
+  text-decoration: none;
+  color: black;
+}
+#close-btn a:link {
+  text-decoration: none;
+  color: black;
 }

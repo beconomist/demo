@@ -50,7 +50,13 @@ app.use(bodyParser.urlencoded({
 
 // 設定 static resources 的檔案夾
 // express 會直接從 public 檔案夾 load，所以 public 並不會成為 URL 的一部分
-app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use(express.static(path.join(__dirname, 'public')));
+
+// Set the extensions option to include fallback file extensions
+app.use(express.static(__dirname + '/public', {
+  extensions: ['html']
+}));
 
 // Router middleware
 routes(app);

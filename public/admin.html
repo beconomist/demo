@@ -5,15 +5,11 @@
 </head>
 
 <body>
-  <form action="/postForm" method="post">
-    Title: <input class='form-style' type="text" name="title" />
-    Author: <input class='form-style' type="text" name="user" />
-    <textarea class='form-style' rows='10' name="content">
-
-
-    </textarea>
-    Tag: <input class='form-style' type="text" name="tag" />
-    <input type="submit" value="Submit">
+  <form action="/posts" method="post">
+    Title: <input class='form-style' type="text" name="title" placeholder="title"/>
+    Content: <textarea class='form-style' rows='10' name="content" placeholder="enter your main content here"></textarea>
+    Tag: <input class='form-style' type="text" name="tag" placeholder="tag"/>
+    <input type="submit" value="Submit" />
 </form>
 
 <script>

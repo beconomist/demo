@@ -12,25 +12,34 @@ const APIsController = require('../controllers/apis_controller');
 // Request handlers
 module.exports = (app) => {
 
+  /**
+   * API related routes
+   */
+  app.get('/meetups', APIsController.getMeetups);
 
-  // 首頁
-  // app.get('/', APIsController.greeting);
-
-  // Posts related routes:
+  /**
+   * Post model related routes
+   */
   app.get('/posts', PostsController.getPosts);
+  app.post('/posts', PostsController.createPost);
 
-  // app.get('/admin', PostsController.getAdmin);
-
-  app.post('/postForm', PostsController.createPost);
-
-  // Users related routes
+  /**
+   * User model related routes
+   */
   app.post('/users', UsersController.create);
-  // app.get('/users/:id', UsersController.read);
+  app.get('/users/:name', UsersController.getUser);
   app.put('/users/:id', UsersController.edit);
   app.delete('/users/:id', UsersController.delete);
 
-  // API related routes
-  app.get('/meetups', APIsController.getMeetups);
+  /**
+   * Comment model related routes
+   */
+
+
+  /**
+   * Tag model related routes
+   */
+
 
 
 };

@@ -1,15 +1,6 @@
 <html>
 <head>
-  <style>
-    html {
-      background-color: yellow;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    button {
-      margin-top: 50px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel='stylesheet' type='text/css' href='css/style.css' />
 </head>
 <body>
@@ -19,7 +10,23 @@
 <h1> Taipei Beginner Programmers </h1>
 
 
-<button type='button' class='admin-btn' onclick='location.href="/admin.html"'> Admin </button>
+<button type='button' class='admin-btn' onclick='location.href="/admin"'> + New Post </button>
+
+<button type='button' class='admin-btn' onclick='createNewUser()'> + New User </button>
+
+<div id='popup'>
+  <h2> 新增使用者　</h2>
+  <form action="/users" method="post" onsubmit="return closePopup();">
+    Name (no space, more than 3 characters) <input class='form-style' type="text" name="name" placeholder="name"/>
+    Pasword: <input class='form-style' type="text" name="password" placeholder="password"/>
+    Email: <input class='form-style' type="text" name="email" placeholder="email"/>
+    <input type="submit" value="Submit" />
+  </form>
+  <div id='close-btn'>
+    <a href='' onclick='closePopup()'>X</a>
+  </div>
+</div>
+
 
 <h2> 活動報名 </h2>
 
@@ -49,7 +56,7 @@ $(document).ready(() => {
      postsArray.forEach((post) => {
        let listItem = document.createElement('div');
        // listItem.innerHTML = '<h3>' + post.title + '</h3>' + '<p style="font-style:italic"> by ' + post.author + '</p>' + '<p>' + post.content + '</p>' + <span>;
-       listItem.innerHTML = `<h3>${post.title}</h3><p style="font-style:italic">by ${post.author} </p> <p>${post.content}</p><span class="tag-style">${post.tag}</span>`
+       listItem.innerHTML = `<h3>${post.title}</h3><p style="font-style:italic">by <a href="/users/${post.author}">${post.author}</a> </p> <p>${post.content}</p><span class="tag-style">${post.tag}</span>`
        document.getElementById('post-container').appendChild(listItem);
      });
    }).catch((err) => {
@@ -64,9 +71,40 @@ $(document).ready(() => {
       document.getElementById('meetup-container').innerHTML = text;
     }).catch((err) => {
       throw err;
-    });
+  });
 
 });
+
+function createNewUser() {
+  const popup = document.getElementById('popup');
+  const backDiv = document.createElement('div');
+  backDiv.style.width = '100vw';
+  backDiv.style.height = '100vh';
+  backDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
+  backDiv.style['z-index'] = 999;
+  backDiv.style.position = 'fixed';
+  backDiv.style.top = '0';
+  backDiv.style.left = '0';
+  backDiv.style.padding = 0;
+  backDiv.style.margin = 0;
+  document.body.appendChild(backDiv);
+
+  // 顯示新增使用者form
+  popup.style.display = 'block';
+  popup.style['z-index'] = 1000;
+  popup.style.position = 'fixed';
+  popup.style.width = '80%';
+  popup.style.width = '50%';
+  popup.style.top = '200px';
+  popup.style.left = '250px';
+  popup.style['border-radius'] = '10px';
+
+}
+
+function closePopup() {
+  const popup = document.getElementById('popup');
+  popup.style.display = 'none';
+}
 
 
 </script>
