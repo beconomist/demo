@@ -4,34 +4,34 @@ const User = require('../models/user');
 // Response handlers
 module.exports = {
 
- // ES6 Shorthand Object Literal
+  // Create user route: passing!
+  create(req, res, next) {
+    // console.log(req.body);
+    const userProps = req.body;
+    User.create(userProps)
+     .then((user) => {
+       res.redirect('/');
+     })
+     .catch(next);
+  },
 
  // Read user route
- getUser(req, res, next) {
+ read(req, res, next) {
    User.findOne({ name: req.params.name}, (err, user) => {
      if (err) throw err;
-     res.redirect('/users/' + user.name);
+     res.redirect('/');
  })
  .catch(next);
  },
 
- // Create user route
- create(req, res, next) {
-   const userProps = req.body;
-   User.create(userProps)
-    .then((user) => {
-      res.redirect('/');
-    })
-    .catch(next);
- },
 
  // Update user route
- edit(req, res, next) {
-   const userId = req.params.id;
+ update(req, res, next) {
+   const name = req.params.name;
    const userProps = req.body;
 
-   User.findByIdAndUpdate({ _id: userId }, userProps)
-    .then(() => User.findById({ _id: userId }))
+   User.findByIdAndUpdate({ name: name }, userProps)
+    .then(() => User.findById({ name: name }))
     .then(user => res.send(user))
     .catch(next);
  },

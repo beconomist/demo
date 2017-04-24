@@ -4,7 +4,7 @@ const app = require('../app');
 
 // Test GET / request
 describe('The express app', () => {
-  it('handles a GET request to /', (done) => {
+  xit('handles a GET request to /', (done) => {
     request(app)
       .get('/')
       .end((err, response) => {

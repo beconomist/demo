@@ -2,7 +2,18 @@ const Post = require('../models/post');
 
 module.exports = {
 
-  getPosts(req, res, next) {
+
+  create(req, res, next) {
+      const postProps = req.body;
+      Post.create(postProps)
+        .then((post) => {
+          res.redirect('/');
+        })
+        .catch(next);
+
+  },
+
+  readAll(req, res, next) {
     Post.find().limit(100).exec((err, posts) => {
       res.send(posts);
     }).catch(next);
@@ -11,18 +22,20 @@ module.exports = {
       //   console.log(post.title);
       // }).catch(next);
   },
-  // getAdmin(req, res, next) {
-  //   res.sendFile('../public/admin.html', { root: __dirname });
-  //
-  // },
 
-  createPost(req, res, next) {
-    const postProps = req.body;
-    Post.create(postProps)
-      .then((post) => {
-        res.redirect('/');
-      })
-      .catch(next);
+  readOne(req, res, next) {
+
+
+  },
+
+  update(req, res, next) {
+
+
+  },
+
+  delete(req, res, next) {
+
+
 
   }
 

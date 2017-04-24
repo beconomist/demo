@@ -20,16 +20,25 @@ module.exports = (app) => {
   /**
    * Post model related routes
    */
-  app.get('/posts', PostsController.getPosts);
-  app.post('/posts', PostsController.createPost);
+  app.post('/posts', PostsController.create);
+
+  app.get('/posts', PostsController.readAll);
+  app.get('/posts/:id', PostsController.readOne);
+
+  app.put('/posts/:id', UsersController.update);
+
+  app.put('/posts/:id', UsersController.delete);
+
 
   /**
    * User model related routes
    */
   app.post('/users', UsersController.create);
-  app.get('/users/:name', UsersController.getUser);
-  app.put('/users/:id', UsersController.edit);
-  app.delete('/users/:id', UsersController.delete);
+
+  app.get('/users/:name', UsersController.read);
+
+  app.put('/users/:name', UsersController.update);
+  app.delete('/users/:name', UsersController.delete);
 
   /**
    * Comment model related routes

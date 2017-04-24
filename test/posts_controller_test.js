@@ -5,17 +5,19 @@ const mongoose= require('mongoose');
 const app = require('../app');
 
 const Post = mongoose.model('post');
+// const User = mongoose.model('user');
+// const Comment = require('../models/comment');
 
 describe('Posts controller test', () => {
 
-  it.only('creates a post to /postForm', (done) => {
+  // Create post test: passing!
+  it('creates a post to /postForm', (done) => {
     request(app)
       .post('/posts')
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send({
         title: 'New Post',
-        content: 'New Content',
-        tag: 'Random'
+        content: 'New Content'
       })
       .end(() => {
         Post.findOne({ title: 'New Post' })

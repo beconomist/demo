@@ -56,7 +56,11 @@ $(document).ready(() => {
      postsArray.forEach((post) => {
        let listItem = document.createElement('div');
        // listItem.innerHTML = '<h3>' + post.title + '</h3>' + '<p style="font-style:italic"> by ' + post.author + '</p>' + '<p>' + post.content + '</p>' + <span>;
-       listItem.innerHTML = `<h3>${post.title}</h3><p style="font-style:italic">by <a href="/users/${post.author}">${post.author}</a> </p> <p>${post.content}</p><span class="tag-style">${post.tag}</span>`
+       listItem.innerHTML =
+         `<h3>${post.title}</h3>
+            <p style="font-style:italic">by<a href="/users/${post.author}"> ${post.author}</a></p>
+            <p>${post.content}</p>
+            <span class="tag-style">${post.tag}</span>`
        document.getElementById('post-container').appendChild(listItem);
      });
    }).catch((err) => {

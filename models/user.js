@@ -3,8 +3,8 @@
 const mongoose = require('mongoose');
 // Schema 可以定義資料格式
 const Schema = mongoose.Schema;
-// const bcrypt = require('bcrypt'); // 將使用者輸入的密碼加密後存入資料庫
-// const SALT_WORK_FACTOR = 12;  // 加密時的計算複雜係數
+const bcrypt = require('bcrypt'); // 將使用者輸入的密碼加密後存入資料庫
+const SALT_WORK_FACTOR = 12;  // 加密時的計算複雜係數
 
 // 把 mongoose 的 Promise 設定為 Node.js 的 Promise
 mongoose.Promise = global.Promise;
@@ -36,38 +36,42 @@ const UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'post'
   }]
-
-
-
 });
 
-// what is pre function?
-// UserSchema.pre('save', (next) => {
-//   var user = this;
-//
-//   //
-//   if (!user.isModified('password')) return next();
-//
-//   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-//     if (err) return next(err);
-//
-//     bcrypt.hash(user.password, salt, function(err, hash) {
-//       if (err) return next(err);
-//
-//       user.password = hash;
-//       next();
-//     });
-//   });
-// });
+/**
+ * 使用者密碼加密
+ */
+UserSchema.pre('save', function(next) {
+  var user = this;
 
-// methos 需要再 mongooes.model()的前面
+  // 如果密碼是新的或被修改了，hash密碼
+  if (!user.isModified('password')) return next();
+
+  // 生成一個salt
+  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+    if (err) return next(err);
+
+    // 用salt把密碼加密
+    bcrypt.hash(user.password, salt, function(err, hash) {
+      if (err) return next(err);
+
+      // 把使用者輸入的密碼換成hashed後的密碼
+      user.password = hash;
+
+      // 把控制權丟還給controller
+      next();
+    });
+  });
+});
+
+// Methods 需要在 mongooes.model()的前面
 // 所有的 user instance 都可使用這個方法
-// UserSchema.methods.comparePassword = (candidatePassword, cb) => {
-//     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-//       if (err) return cb(err);
-//       cb(null, isMatch);
-//     });
-// };
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+      if (err) return cb(err);
+      cb(null, isMatch);
+    });
+};
 
 //  User Class or User Model: 在 mongoDB 裡以 UserSchema 為 model 建立一個名為 user 的 collection.
 const User = mongoose.model('user', UserSchema);

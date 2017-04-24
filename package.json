@@ -2,9 +2,11 @@
   "name": "demo",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test nodemon --exec 'mocha -R min'"
+    "test": "NODE_ENV=test nodemon --exec 'mocha -R min'",
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,12 +1,20 @@
 
-### To Do List
+Development Note
+---
 
-  1. 設計 visible page & routes
-  1. 整理 data models => 參考 udemy course -> users
--> 增加 user, comments crud operation
-  1. 研究 template engine => 確定做法
-  1. 整合前端程式碼
-  1. 使用者登入功能
-    * passport.js
-    * meetup
-  1. 整合meetup RSVP
+#### To Do List
+Updated: 00:56 Apr 24, 2017
+
+- [ ] 導入 template engine (ejs, handlebars...)
+- [ ] 增加 user login 和 authentication
+- [ ] 設計 visible pages & routes
+- [ ] 完成 data models (User, Post, Comment, Tag)
+- [ ] 整合 text editor
+- [ ] 整合 front-end
+- [ ] 整合 meetup RSVP 功能
+- [ ] 製作 API 文件
+
+
+#### To Read List
+
+- [ ] [Build CMS from Scratch](https://code.tutsplus.com/tutorials/build-a-cms-nodepress--cms-25633)

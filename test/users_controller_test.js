@@ -10,42 +10,51 @@ const Comment = require('../models/comment');
 
 describe('Users controller testing', () => {
 
-  // Create user test
+  // Create user test: passing!
   it('POST to /users creates a new user', (done) => {
-    // const bao = new User({
-    //   name: 'Bao',
-    //   password: '11111',
-    //   email: 'bao@example.com'
-    // });
-    const post = new Post({
-      title: 'On Self-Teaching Programming',
-      content: 'Some content about self-teaching yourself programming'
-    });
-    const comment = new Comment({
-      conent: 'Thanks for sharing.'
-    });
-
-    // bao.posts.push(post);
-    // post.comments.push(comment);
-    // comment.user = bao;
-
     User.count().then(count => {
       request(app)
         .post('/users')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-          name: 'Bao',
+          name: 'bao',
           password: '11111',
           email: 'bao@example.com'
         })
         .end(() => {
           User.count().then(newCount => {
-            console.log(`count: ${count}, newCount: ${newCount}`);
+            // console.log(`count: ${count}, newCount: ${newCount}`);
             assert(count + 1 === newCount);
           });
         done();
         });
     });
   });
+
+  // Authentication test: passing!
+  it('Authenication test', (done) => {
+    request(app)
+      .post('/users')
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .send({
+        name: 'bao',
+        password: '11111',
+        email: 'bao@example.com'
+      })
+      .end(() => {
+        User.findOne({ name: 'bao'}, (err, user) => {
+          if (err) throw err;
+          // 測試密碼正確
+          user.comparePassword('11111', function(err, isMatch) {
+            if (err) throw err;
+            assert(isMatch === true);
+            done();
+          });
+        });
+      });
+
+  });
+
 
   // Read user test
   // it('GET to /users/id reads an existing user', (done) => {
@@ -55,7 +64,7 @@ describe('Users controller testing', () => {
   // });
 
   // Update user test
-  it('PUT to /users/id edits an existing user', (done) => {
+  xit('PUT to /users/id edits an existing user', (done) => {
     const user = new User({
       username: 'myTestName',
       password: 'myTestPassword',
@@ -77,7 +86,7 @@ describe('Users controller testing', () => {
   });
 
   // Delete user test
-  it('DELETE to /users/id deletes an existing user', (done) => {
+  xit('DELETE to /users/id deletes an existing user', (done) => {
     const user = new User({
       username: 'myTestName',
       password: 'myTestPassword',
